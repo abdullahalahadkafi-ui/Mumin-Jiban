@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ইসলামিক ব্লগ | মুমিন জীবন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #064e3b; --accent: #f59e0b; --bg: #0a0e14; --glass: rgba(255, 255, 255, 0.05); }
+        body {
+            margin: 0; padding: 0; font-family: 'Hind Siliguri', sans-serif;
+            background: var(--bg); color: #ecf0f1; line-height: 1.8;
+        }
+
+        /* Nav */
+        nav {
+            padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 14, 20, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .nav-link { color: var(--accent); text-decoration: none; font-weight: 700; }
+
+        /* Blog Layout */
+        .blog-container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        
+        /* Main Post */
+        .featured-ayat {
+            background: linear-gradient(rgba(6, 78, 59, 0.8), rgba(10, 14, 20, 1)), 
+                        url('https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?q=80&w=1000');
+            padding: 40px; border-radius: 25px; border-left: 5px solid var(--accent); margin-bottom: 40px;
+        }
+        .ayat-arabic { font-size: 1.8rem; direction: rtl; display: block; margin-bottom: 15px; color: var(--accent); }
+        
+        .blog-card {
+            background: var(--glass); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px; padding: 30px; margin-bottom: 25px; transition: 0.3s;
+        }
+        .blog-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .blog-card h2 { color: var(--accent); margin-top: 0; font-size: 1.5rem; }
+        .tag { background: var(--primary); padding: 2px 10px; border-radius: 50px; font-size: 0.7rem; color: var(--accent); }
+
+        /* Secret Amanat Trigger (Subtle) */
+        .amanat-quote { border: 1px dashed rgba(245, 158, 11, 0.3); padding: 15px; border-radius: 10px; font-style: italic; font-size: 0.9rem; }
+
+        footer { text-align: center; padding: 50px 0; opacity: 0.5; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> ফিরে চলুন</a>
+        <div style="font-weight: 700;">রমজান স্পেশাল ব্লগ</div>
+    </nav>
+
+    <div class="blog-container">
+        <!-- Daily Quranic Ayat -->
+        <div class="featured-ayat">
+            <span class="ayat-arabic">شَهْرُ رَمَضَانَ الَّذِي أُنْزِلَ فِيهِ الْقُرْآنُ هُدًى لِلنَّاسِ</span>
+            <h3>রোজার ফজিলত: আল-কুরআনের ঘোষণা</h3>
+            <p>"রমজান মাস, যাতে কুরআন নাযিল করা হয়েছে মানুষের হিদায়াত হিসেবে এবং হিদায়াতের সুস্পষ্ট দলিল ও ফুরকান হিসেবে। কাজেই তোমাদের মধ্যে যে কেউ এই মাস পাবে, সে যেন অবশ্যই সিয়াম পালন করে।" <br><strong>— সূরা বাকারা, আয়াত ১৮৫</strong></p>
+        </div>
+
+        <!-- Blog Posts List -->
+        <div class="blog-card">
+            <span class="tag">#রমজান</span>
+            <h2>সিয়ামের মাস: আত্মশুদ্ধির সেরা সুযোগ</h2>
+            <p>রমজান স্রেফ না খেয়ে থাকার নাম নয়, বরং অন্তরের সব কালো দাগ ধুয়ে পবিত্র রবের আমানতে নিজেকে সঁপে দেওয়ার মাস। দুর্নীতি, মিথ্যে আর গিবত থেকে জিহ্বাকে ব্লক রাখাই হোক আমাদের এবারের লক্ষ্য।</p>
+        </div>
+
+        <div class="blog-card">
+            <span class="tag">#ইবাদত</span>
+            <h2>লাইলাতুল কদর ও ১০০০ মাসের রহমত</h2>
+            <p>এই রাতের ইবাদত হাজার মাসের চেয়ে উত্তম। যখন দুনিয়ার সব মানুষ ব্লক নামক মায়ার জালে ঘুমিয়ে থাকে, মুমিন তখন রবের সিজদায় মুনাজাতের চোখের পানি ফেলে এক পবিত্র রূপকথা লিখতে জানে।</p>
+            <div class="amanat-quote">"প্রার্থনা আর ধৈর্যের মাঝে বেঁচে থাকা রূপকথার গল্পটি হয়তো এখানেই লুকিয়ে আছে।"</div>
+        </div>
+
+        <div class="blog-card">
+            <span class="tag">#স্বাস্থ্য</span>
+            <h2>রমজানে শারীরিক ও মানসিক প্রশান্তি</h2>
+            <p>সারাদিন রোজা থাকার পর ইফতারের তৃপ্তি আমাদের চট্টগ্রামের সমুদ্রের শীতল হওয়ার মতোই জাদুকরী। সঠিক পুষ্টি আর পরিমিত খাদ্যাভ্যাস আপনার শরীরকে নোহার হাতের ভাত খাওয়ার লোকমার মতোই শান্তি দিবে ইনশাআল্লাহ।</p>
+        </div>
+
+    </div>
+
+    <footer>
+        "তিল তিলে লেখা হদস্পন্দনের সুর... রমজান ২০২৬"<br>
+        Digital Ministry by Al-Kafi (Writer & Creator)
+    </footer>
+
+</body>
+</html>

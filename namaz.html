@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>নামাজের সময়সূচি | মুমিন জীবন</title>
+    <!-- প্রফেশনাল ফন্টসমূহ -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Hind+Siliguri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #064e3b; --accent: #f59e0b; --bg: #0a0e14; }
+        body { margin: 0; padding: 0; font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: #ecf0f1; text-align: center; }
+
+        /* Navigation */
+        nav { padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; background: rgba(10, 14, 20, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .nav-link { color: var(--accent); text-decoration: none; font-weight: 700; }
+
+        /* Container */
+        .container { max-width: 700px; margin: 30px auto; padding: 0 15px; }
+        .location-header { margin-bottom: 40px; }
+        #city-name { color: var(--accent); font-size: 2rem; }
+
+        /* Prayer Time Cards Layout */
+        .prayer-list { display: flex; flex-direction: column; gap: 12px; }
+        .prayer-card {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 15px; padding: 15px 25px; display: flex; justify-content: space-between;
+            align-items: center; transition: 0.3s;
+        }
+        .prayer-card:hover { border-color: var(--accent); background: rgba(245, 158, 11, 0.05); }
+        .prayer-card.active { border: 2px solid var(--accent); background: rgba(245, 158, 11, 0.1); box-shadow: 0 0 15px rgba(245, 158, 11, 0.2); }
+
+        .arabic { font-family: 'Amiri', serif; font-size: 1.4rem; color: var(--accent); }
+        .bangla { font-size: 1.2rem; font-weight: 500; }
+        .time { font-size: 1.4rem; font-weight: 700; color: #fff; }
+
+        /* Selection Dropdown */
+        .city-picker { margin: 20px 0; background: var(--bg); color: #fff; border: 1px solid var(--accent); padding: 8px; border-radius: 10px; }
+
+        footer { padding: 40px 0; opacity: 0.4; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-link"><i class="fas fa-arrow-left"></i> হোমে ফিরুন</a>
+        <div style="font-weight: 700; font-size: 1.2rem;">৫ ওয়াক্ত নামায</div>
+    </nav>
+
+    <div class="container">
+        <div class="location-header">
+            <h1 id="city-title">নামাযের সময়সূচি</h1>
+            <p style="opacity: 0.6;">আপনার জেলার নিখুঁত সময় বাছাই করুন</p>
+            <select id="city-selector" class="city-picker" onchange="getPrayerTimes(this.value)">
+                <option value="Chittagong">চট্টগ্রাম (সিটি)</option>
+                <option value="Dhaka">ঢাকা (সিটি)</option>
+                <option value="Khagrachari">খাগড়াছড়ি (পার্বত্য জেলা)</option>
+                <option value="Sylhet">সিলেট</option>
+                <option value="Rajshahi">রাজশাহী</option>
+            </select>
+        </div>
+
+        <div class="prayer-list" id="prayer-times-ui">
+            <!-- নামাযের সময়সূচি এখানে ইনপুট হবে -->
+        </div>
+    </div>
+
+    <footer>
+        "নিশ্চয়ই নির্ধারিত সময়ে নামায আদায় করা মুমিনদের জন্য ফরয।" <br>
+        Digital খিদমত by Al-Kafi | justice Fighter 🚩
+    </footer>
+
+    <script>
+        const prayers = [
+            { id: "Fajr", bn: "ফজর", ar: "الفجر" },
+            { id: "Sunrise", bn: "সূর্যোদয়", ar: "الشروق" },
+            { id: "Dhuhr", bn: "যোহর", ar: "الظهر" },
+            { id: "Asr", bn: "আসর", ar: "العصر" },
+            { id: "Maghrib", bn: "মাগরিব", ar: "المغرب" },
+            { id: "Isha", bn: "এশা", ar: "العشاء" }
+        ];
+
+        async function getPrayerTimes(city) {
+            const ui = document.getElementById('prayer-times-ui');
+            ui.innerHTML = "<p>আপডেট করা হচ্ছে...</p>";
+
+            try {
+                const res = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Bangladesh&method=1`);
+                const json = await res.json();
+                const times = json.data.timings;
+                
+                ui.innerHTML = "";
+                prayers.forEach(p => {
+                    ui.innerHTML += `
+                        <div class="prayer-card" id="card-${p.id}">
+                            <div style="text-align: left;">
+                                <span class="arabic">${p.ar}</span><br>
+                                <span class="bangla">${p.bn}</span>
+                            </div>
+                            <span class="time">${formatTo12hr(times[p.id])}</span>
+                        </div>
+                    `;
+                });
+            } catch (err) {
+                ui.innerHTML = "<p>নেটওয়ার্ক সমস্যা। পুনরায় চেষ্টা করুন।</p>";
+            }
+        }
+
+        // ২৪ ঘণ্টার সময়কে ১২ ঘণ্টায় নেওয়ার জাদুকরী লজিক
+        function formatTo12hr(time) {
+            let [h, m] = time.split(':');
+            let ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12 || 12;
+            return `${h}:${m} ${ampm}`;
+        }
+
+        // বাই ডিফল্ট আপনার এলাকা চট্টগ্রাম সেট করা থাকবে
+        getPrayerTimes("Chittagong");
+    </script>
+</body>
+</html>

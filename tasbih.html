@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ডিজিটাল তাসবিহ | মুমিন জীবন</title>
+    <!-- Arabic Fonts Import -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Lateef&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #064e3b; --accent: #f59e0b; --bg: #0a0e14; }
+        body { margin: 0; padding: 0; font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: #fff; text-align: center; }
+        
+        .arabic-text {
+            font-family: 'Amiri', serif; font-size: 3rem; color: var(--accent); margin: 30px 0;
+            display: block; line-height: 1.5; text-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+        }
+        
+        .tasbih-container { max-width: 400px; margin: 50px auto; padding: 20px; }
+        .counter-display {
+            width: 200px; height: 200px; border: 8px solid var(--accent);
+            border-radius: 50%; margin: 0 auto; display: flex; justify-content: center;
+            align-items: center; font-size: 4rem; font-weight: 700; background: rgba(255,255,255,0.05);
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
+        }
+        .btn-count {
+            margin-top: 40px; width: 100px; height: 100px; border-radius: 50%;
+            border: none; background: var(--accent); color: #000; font-size: 1.2rem;
+            font-weight: 700; cursor: pointer; transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .btn-count:active { transform: scale(0.9); }
+        .btn-reset { display: block; margin: 30px auto; color: #ef4444; cursor: pointer; background: none; border: none; font-family: inherit; }
+
+        nav { padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; background: rgba(10, 14, 20, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" style="color:var(--accent); text-decoration: none;"><i class="fas fa-home"></i> হোম</a>
+        <div style="font-weight: 700;">ডিজিটাল তাসবিহ</div>
+    </nav>
+
+    <div class="tasbih-container">
+        <span class="arabic-text" id="dua-text">سُبْحَانَ اللهِ</span>
+        <p id="dua-meaning" style="font-style: italic; margin-bottom: 40px; opacity: 0.8;">আল্লাহ তায়ালা পবিত্র (SubhanAllah)</p>
+
+        <div class="counter-display" id="count-val">০</div>
+        <button class="btn-count" onclick="increment()">CLICK</button>
+        <button class="btn-reset" onclick="resetCounter()">পুনরায় শুরু</button>
+    </div>
+
+    <script>
+        let count = 0;
+        const duas = [
+            {ar: "سُبْحَانَ اللهِ", bn: "আল্লাহ তায়ালা পবিত্র (SubhanAllah)"},
+            {ar: "اَلْحَمْدُ لِلهِ", bn: "সকল প্রশংসা আল্লাহর (Alhamdulillah)"},
+            {ar: "لَا اِلٰهَ اِلَّا اللهُ", bn: "আল্লাহ ছাড়া কোনো উপাস্য নেই (La ilaha illAllah)"},
+            {ar: "اَللهُ اَكْبَرُ", bn: "আল্লাহ মহান (Allahu Akbar)"}
+        ];
+        let duaIdx = 0;
+
+        function increment() {
+            count++;
+            document.getElementById('count-val').innerText = count;
+            // ৩৩ বার হলে দোয়া চেঞ্জ হবে
+            if(count % 33 === 0) {
+                duaIdx = (duaIdx + 1) % duas.length;
+                document.getElementById('dua-text').innerText = duas[duaIdx].ar;
+                document.getElementById('dua-meaning').innerText = duas[duaIdx].bn;
+                if(window.navigator.vibrate) window.navigator.vibrate(50);
+            }
+        }
+        function resetCounter() { count = 0; document.getElementById('count-val').innerText = 0; }
+    </script>
+</body>
+</html>

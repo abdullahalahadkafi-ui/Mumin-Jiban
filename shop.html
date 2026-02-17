@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ডিজিটাল শপ | মুমিন জীবন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #064e3b; --accent: #f59e0b; --bg: #0a0e14; }
+        body { margin: 0; padding: 0; font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: #fff; text-align: center; }
+        nav { padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; background: rgba(10, 14, 20, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1000px; margin: 40px auto; padding: 20px; }
+        .item-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; transition: 0.3s; }
+        .item-card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+        .item-card h3 { color: var(--accent); margin: 10px 0; }
+        .btn-buy { background: var(--accent); color: #000; border: none; padding: 10px 25px; border-radius: 25px; cursor: pointer; font-weight: 700; width: 100%; }
+        
+        .amanat-banner { background: #3b82f6; padding: 10px; font-size: 0.8rem; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" style="color:var(--accent); text-decoration: none;"><i class="fas fa-home"></i> হোম</a>
+        <div style="font-weight: 700;">রমজান সংগ্রহশালা</div>
+    </nav>
+
+    <h2 style="margin-top: 40px;">আপনার ইবাদতকে রাঙান</h2>
+
+    <div class="product-grid">
+        <div class="item-card">
+            <img src="https://m.media-amazon.com/images/I/41-q-B8EwaL.jpg" alt="Islamic Book">
+            <h3>প্যারাডক্সিক্যাল সাজিদ-১</h3>
+            <p>আরিফ আজাদ</p>
+            <button class="btn-buy" onclick="alert('স্টক শেষ!')">৳ ২৩০.০</button>
+        </div>
+        <div class="item-card">
+            <img src="https://janamazbd.com/wp-content/uploads/2021/08/Turkish-Chenille-Blue.jpg" alt="Janamaz">
+            <h3>তুরস্কের মখমল জায়নামাজ</h3>
+            <button class="btn-buy" onclick="alert('শীঘ্রই আসছে!')">৳ ৮৫০.০</button>
+        </div>
+        <div class="item-card">
+            <img src="https://static-01.daraz.com.bd/p/d9d20c5417855a9010488421b8b20963.jpg" alt="Ittor">
+            <h3>রয়েয়াল অউদ (আতরের শিশি)</h3>
+            <button class="btn-buy" onclick="alert('খাগড়াছড়ি পর্যন্ত ফ্রি ডেলিভারি!')">৳ ৪৫০.০</button>
+        </div>
+    </div>
+
+    <footer>Developed with Dev-Maya by Al-Kafi (1912)</footer>
+</body>
+</html>

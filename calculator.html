@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>যাকাত ক্যালকুলেটর | মুমিন জীবন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #064e3b; --accent: #f59e0b; --bg: #0a0e14; --glass: rgba(255, 255, 255, 0.05);
+        }
+        body {
+            margin: 0; padding: 0; font-family: 'Hind Siliguri', sans-serif;
+            background: var(--bg); color: #fff; text-align: center;
+        }
+
+        /* Navbar Consistent with Index */
+        nav {
+            padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 14, 20, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .nav-link { color: #fff; text-decoration: none; font-size: 1rem; }
+        .back-btn { color: var(--accent); font-weight: 700; text-decoration: none; }
+
+        /* Calculator Card */
+        .container { max-width: 600px; margin: 50px auto; padding: 20px; }
+        .calc-card {
+            background: var(--glass); padding: 40px; border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        h1 { color: var(--accent); font-size: 2.2rem; margin-bottom: 30px; }
+        
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; font-size: 0.9rem; margin-bottom: 8px; opacity: 0.8; }
+        .input-group input {
+            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #333;
+            background: #111; color: #fff; font-size: 1.1rem; outline: none; box-sizing: border-box;
+        }
+        .input-group input:focus { border-color: var(--accent); }
+
+        .result-box {
+            background: rgba(245, 158, 11, 0.15); margin-top: 30px; padding: 20px;
+            border-radius: 15px; display: none; border: 1px solid var(--accent);
+        }
+        .result-box h2 { font-size: 1.5rem; margin: 0; color: #fff; }
+        .result-box .amount { font-size: 2.2rem; color: var(--accent); font-weight: 700; }
+
+        .btn-calc {
+            width: 100%; background: var(--accent); color: #000; border: none;
+            padding: 15px; border-radius: 12px; font-weight: 700; font-size: 1.2rem;
+            cursor: pointer; transition: 0.3s;
+        }
+        .btn-calc:hover { transform: scale(1.02); }
+
+        footer { margin-top: 50px; font-size: 0.8rem; opacity: 0.5; padding-bottom: 40px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> হোম-এ ফিরুন</a>
+        <div style="font-weight: 700; color: var(--accent);">যাকাত ক্যালকুলেটর</div>
+    </nav>
+
+    <div class="container">
+        <div class="calc-card">
+            <h1>হিসাব কষুন শুদ্ধভাবে</h1>
+            
+            <div class="input-group">
+                <label>নগদ টাকা (ব্যাংক ও হাতে)</label>
+                <input type="number" id="cash" placeholder="৳ ০০০০">
+            </div>
+
+            <div class="input-group">
+                <label>স্বর্ণের বর্তমান মূল্য</label>
+                <input type="number" id="gold" placeholder="৳ ০০০০">
+            </div>
+
+            <div class="input-group">
+                <label>ব্যবসায়িক পণ্য বা স্টক</label>
+                <input type="number" id="business" placeholder="৳ ০০০০">
+            </div>
+
+            <div class="input-group">
+                <label>বিয়োগযোগ্য ঋণ (যদি থাকে)</label>
+                <input type="number" id="loan" placeholder="৳ ০০০০">
+            </div>
+
+            <button class="btn-calc" onclick="calculateZakat()">যাকাতের পরিমাণ দেখুন</button>
+
+            <div class="result-box" id="result-ui">
+                <h2>আপনার প্রদেয় যাকাত</h2>
+                <span class="amount" id="total-zakat">৳ ০.০</span>
+                <p style="font-size: 0.8rem; margin-top: 10px;">(এটি আপনার মোট সম্পদের ২.৫%)</p>
+            </div>
+        </div>
+
+        <!-- কাফি ভাইর লোহাগাড়ার ২০ দিনের স্মৃতির জন্য ছোট সিক্রেট টেক্সট (Public invisible but meaningful) -->
+        <p style="margin-top: 40px; opacity: 0.3; font-size: 0.7rem;">মায়ার হিসাব রবের কাছেই সংরক্ষিত...</p>
+    </div>
+
+    <footer>
+        Digital Mission by Al-Kafi | Sabr is Strength
+    </footer>
+
+    <script>
+        function calculateZakat() {
+            const cash = parseFloat(document.getElementById('cash').value) || 0;
+            const gold = parseFloat(document.getElementById('gold').value) || 0;
+            const business = parseFloat(document.getElementById('business').value) || 0;
+            const loan = parseFloat(document.getElementById('loan').value) || 0;
+
+            const totalAsset = cash + gold + business - loan;
+            
+            // যাকাত ২.৫%
+            const zakat = totalAsset * 0.025;
+
+            if (totalAsset > 0) {
+                document.getElementById('total-zakat').innerText = "৳ " + zakat.toLocaleString();
+                document.getElementById('result-ui').style.display = 'block';
+            } else {
+                alert("আপনার নিসাব পরিমাণ সম্পদ নেই!");
+                document.getElementById('result-ui').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

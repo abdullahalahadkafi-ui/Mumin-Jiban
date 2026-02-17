@@ -1,0 +1,106 @@
+<!-- সালাত ও ইফতার ড্যাশবোর্ড (Daily Updated Card) -->
+<section class="dashboard-section" style="max-width: 900px; margin: 30px auto; padding: 10px;">
+    <div style="background: rgba(245, 158, 11, 0.1); border: 2px solid var(--accent); border-radius: 30px; padding: 25px; backdrop-filter: blur(10px);">
+        
+        <!-- লোকেশন ও ডেট ব্যানার -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+            <div style="text-align: left;">
+                <h4 style="margin:0; opacity: 0.6; font-size: 0.8rem;">বর্তমান লোকেশন</h4>
+                <h3 id="live-city" style="margin:0; color: var(--accent);"><i class="fas fa-map-marker-alt"></i> চট্টগ্রাম</h3>
+            </div>
+            <div style="text-align: right;">
+                <p id="today-date" style="margin:0; font-weight: bold; font-size: 0.9rem;">-- ফেব্রুয়ারি, ২০২৬</p>
+                <p style="margin:0; font-size: 0.8rem; opacity: 0.5;">মাহে রমজানের ক্ষণগণনা</p>
+            </div>
+        </div>
+
+        <!-- টাইম সূচি গ্রিড -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px;">
+            
+            <div class="prayer-box">
+                <span class="ar-label">الفجر</span>
+                <p class="bn-label">সেহরির শেষ</p>
+                <h4 id="time-fajr">--:--</h4>
+            </div>
+
+            <div class="prayer-box">
+                <span class="ar-label">الشروق</span>
+                <p class="bn-label">সূর্যোদয় (ফজর শেষ)</p>
+                <h4 id="time-sunrise">--:--</h4>
+            </div>
+
+            <div class="prayer-box">
+                <span class="ar-label">الظهر</span>
+                <p class="bn-label">যোহর শুরু</p>
+                <h4 id="time-dhuhr">--:--</h4>
+            </div>
+
+            <div class="prayer-box">
+                <span class="ar-label">العصر</span>
+                <p class="bn-label">আসর শুরু</p>
+                <h4 id="time-asr">--:--</h4>
+            </div>
+
+            <div class="prayer-box highlight">
+                <span class="ar-label" style="color: #fff;">المغرب</span>
+                <p class="bn-label">ইফতার / মাগরিব</p>
+                <h4 id="time-maghrib" style="color: #fff; font-size: 1.5rem;">--:--</h4>
+            </div>
+
+            <div class="prayer-box">
+                <span class="ar-label">العشاء</span>
+                <p class="bn-label">এশা শুরু</p>
+                <h4 id="time-isha">--:--</h4>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ড্যাশবোর্ডের স্পেশাল সিএসএস (এটি <style> এ যুক্ত করুন) -->
+<style>
+    .prayer-box {
+        background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); transition: 0.4s;
+    }
+    .prayer-box.highlight { background: var(--primary); border: 2px solid var(--accent); transform: scale(1.05); }
+    .ar-label { font-family: 'Amiri', serif; font-size: 1rem; color: var(--accent); display: block; }
+    .bn-label { font-size: 0.75rem; margin: 5px 0; opacity: 0.7; }
+    .prayer-box h4 { margin: 0; font-size: 1.2rem; }
+    
+    /* Arabic font formatting for Dashboard numbers if needed */
+    .prayer-box h4 { font-weight: 700; letter-spacing: 1px; }
+</style>
+
+<!-- অটোমেটিক আপডেট জাভাস্ক্রিপ্ট (বডির শেষে দিন) -->
+<script>
+    async function loadLiveTimes() {
+        const city = "Chittagong"; // ডিফল্ট চট্টগ্রাম রাখা হলো
+        try {
+            const res = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Bangladesh&method=1`);
+            const data = await res.json();
+            const T = data.data.timings;
+
+            // ডেটা ম্যাপ করা
+            document.getElementById('time-fajr').innerText = formatTo12hr(T.Fajr);
+            document.getElementById('time-sunrise').innerText = formatTo12hr(T.Sunrise);
+            document.getElementById('time-dhuhr').innerText = formatTo12hr(T.Dhuhr);
+            document.getElementById('time-asr').innerText = formatTo12hr(T.Asr);
+            document.getElementById('time-maghrib').innerText = formatTo12hr(T.Maghrib);
+            document.getElementById('time-isha').innerText = formatTo12hr(T.Isha);
+
+            // তারিখ সেট করা
+            const d = new Date();
+            document.getElementById('today-date').innerText = d.getDate() + " ফেব্রুয়ারি, ২০২৬";
+        } catch (err) { console.log("Time Fetch failed."); }
+    }
+
+    // টাইম ফরমেট (AM/PM) কনভার্টার
+    function formatTo12hr(t) {
+        let [h, m] = t.split(':');
+        let suffix = h >= 12 ? 'PM' : 'AM';
+        h = h % 12 || 12;
+        return `${h}:${m} ${suffix}`;
+    }
+
+    window.onload = loadLiveTimes;
+</script>
