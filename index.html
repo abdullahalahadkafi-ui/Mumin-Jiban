@@ -2,154 +2,225 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="favicon.png">
-<link rel="apple-touch-icon" href="favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>মুমিন জীবন | পবিত্র মাহে রমজান ২০২৬</title>
-    <!-- গুগল ফন্ট ও ফন্ট অসাম -->
+    <title>মুমিন জীবন | ডিজিটাল পাহারাদার ২০২৬</title>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --primary: #064e3b; /* Deep Islamic Green */
-            --accent: #f59e0b;  /* Golden Amber */
-            --bg-dark: #0a0e14;
-            --glass: rgba(255, 255, 255, 0.05);
+            --accent: #f59e0b;
+            --bg-blur: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body {
             margin: 0; padding: 0; font-family: 'Hind Siliguri', sans-serif;
-            background-color: var(--bg-dark); color: #ecf0f1;
-            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
-                              url('https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?q=80&w=2000');
-            background-attachment: fixed; background-size: cover;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('romadn (1).jpg');
+            background-size: cover; background-attachment: fixed; background-position: center;
+            color: #fff; text-align: center;
         }
 
-        /* Navbar & Branding */
+        /* Navbar Section */
         nav {
             padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(10, 14, 20, 0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(10, 14, 20, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 1000;
         }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
-        .logo span { color: #fff; }
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+        .secret-r { color: #222; text-decoration: none; font-size: 0.8rem; cursor: pointer; }
 
-        /* Secret Button "R" for Noha */
-        .secret-link { color: #555; text-decoration: none; cursor: default; }
-
-        /* Countdown Hero Section */
-        header { text-align: center; padding: 60px 20px; }
-        .hero-title { font-size: 3rem; margin-bottom: 10px; color: #fff; }
-        
-        .timer-val { font-size: 2.5rem; color: var(--accent); font-weight: 700; display: block; }
-
-        /* Live Timings Cards */
-        .timing-container {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px; max-width: 1000px; margin: 40px auto; padding: 20px;
+        /* Hero / Location Area */
+        header { padding: 40px 20px; }
+        .division-picker {
+            background: #111; border: 1px solid var(--accent); color: var(--accent);
+            padding: 8px 15px; border-radius: 50px; font-family: inherit; cursor: pointer;
         }
-        .timing-card {
-            background: var(--glass); backdrop-filter: blur(10px); padding: 30px;
-            border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.1);
-            transition: 0.3s;
-        }
-        .timing-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .time { font-size: 2rem; color: var(--accent); display: block; margin: 10px 0; }
-        .btn-loc { padding: 5px 15px; border-radius: 20px; border: 1px solid var(--accent); background: none; color: #fff; cursor: pointer; }
 
-        /* Quick Feature Links */
-        .feature-grid {
+        .countdown-box { margin: 20px 0; font-size: 2.2rem; font-weight: 700; color: var(--accent); letter-spacing: 2px; }
+
+        /* পিসি এবং মোবাইলে দুইটা কার্ডকে এক সারিতে রাখার জন্য */
+.timing-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* এই লাইনটিই ম্যাজিক করবে */
+    gap: 12px; 
+    max-width: 1000px;
+    margin: 25px auto;
+    padding: 0 10px;
+}
+
+.timing-card {
+    background: var(--bg-blur);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 18px; /* কর্নার কিছুটা গোল করে প্রফেশনাল লুক */
+    padding: 15px 10px; /* প্যাডিং কমিয়ে সাইজ ছোট করা হলো */
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.timing-card:hover { transform: scale(1.02); border-color: var(--accent); }
+
+/* আইকন আরও ছোট ও স্নিগ্ধ করা */
+.icon-top { font-size: 1.1rem; opacity: 0.8; margin-bottom: 5px; }
+
+/* টেক্সট ও সংখ্যার ফন্ট অ্যাডজাস্টমেন্ট (যাতে এক লাইনে ধরে) */
+.time-label { font-size: 0.8rem; opacity: 0.8; display: block; }
+
+/* সময় বা সংখ্যা স্পষ্ট করা */
+.time-val { 
+    font-size: 1.8rem; /* ৩ এর বদলে ১.৮ করা হয়েছে যাতে এক সারিতে আটে */
+    font-weight: 700; 
+    color: var(--accent); 
+    display: block; 
+    margin: 5px 0; 
+}
+
+/* জেলা লেবেল আরও মার্জিত */
+.city-label { 
+    background: rgba(0,0,0,0.5); 
+    padding: 3px 10px; 
+    border-radius: 30px; 
+    font-size: 0.65rem; 
+    border: 1px solid rgba(245, 158, 11, 0.2); 
+    opacity: 0.7;
+}
+
+/* মোবাইল রেসপন্সিভিটি */
+@media (max-width: 600px) {
+    .timing-section { gap: 8px; }
+    .time-val { font-size: 1.5rem; } /* মোবাইলে ফন্ট আরটু ছোট */
+    .timing-card { padding: 12px 8px; }
+}
+
+        /* Tools Grid */
+        .tools-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 15px; max-width: 1000px; margin: 40px auto; padding: 20px;
         }
-        .f-box {
-            background: rgba(6, 78, 59, 0.3); border: 1px solid #10b98133; padding: 20px;
-            border-radius: 15px; text-align: center; cursor: pointer; text-decoration: none; color: #fff;
+        .tool-btn {
+            background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 25px; border-radius: 20px; color: #fff; text-decoration: none; transition: 0.3s;
         }
-        .f-box i { font-size: 1.5rem; color: var(--accent); margin-bottom: 10px; display: block; }
+        .tool-btn:hover { background: rgba(16, 185, 129, 0.2); border-color: var(--accent); }
+        .tool-btn i { font-size: 1.8rem; color: var(--accent); display: block; margin-bottom: 10px; }
 
         /* Quran Verse Area */
         .verse-box {
-            background: var(--glass); max-width: 800px; margin: 50px auto; padding: 40px;
-            border-radius: 20px; text-align: center; border-right: 5px solid var(--accent);
+            background: #ffffff11; max-width: 800px; margin: 50px auto; padding: 40px;
+            border-radius: 20px; text-align: center; margin: 25px; max-width: 800px;
         }
 
-        footer { text-align: center; padding: 40px 0; font-size: 0.9rem; opacity: 0.6; }
-
-        @media (max-width: 600px) {
-            .hero-title { font-size: 2rem; }
-            .timer-val { font-size: 1.5rem; }
-        }
+        footer { padding: 40px; font-size: 0.8rem; opacity: 0.5; border-top: 1px solid var(--glass-border); }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo"><span>মুমিন</span> জীবন</div>
-        <a href="https://kafirupkotha-chat.onrender.com" class="secret-link">R</a>
+        <div class="logo">মুমিন <span>জীবন</span></div>
+        <div style="display:flex; gap:15px; align-items:center;">
+            <select id="divisionSelect" class="division-picker" onchange="fetchTimings(this.value)">
+                <option value="Chittagong">লোকেশন: চট্টগ্রাম</option>
+                <option value="Dhaka">ঢাকা বিভাগ</option>
+                <option value="Khagrachari">খাগড়াছড়ি</option>
+                <option value="Sylhet">সিলেট</option>
+                <option value="Rajshahi">রাজশাহী</option>
+                <option value="Barisal">বরিশাল</option>
+                <option value="Khulna">খুলনা</option>
+            </select>
+            <a href="https://kafirupkotha-chat.onrender.com" class="secret-r">R</a>
+        </div>
     </nav>
 
     <header>
-        <p style="letter-spacing: 2px;">রমজান ২০২৬ (১৮ ফেব্রুয়ারি — ১৮ মার্চ)</p>
-        <h1 class="hero-title">হে মুমিন, আজ রোজা পালন করো</h1>
-        
+        <p style="opacity:0.6; text-transform:uppercase;">Ramadan 2026 - Digital Companion</p>
+        <div class="countdown-box" id="globalCountdown">১লা রমজানের প্রতিক্ষায়...</div>
+        <p id="currentDate">-- ফেব্রুয়ারি, ২০২৬</p>
     </header>
 
-
-    <!-- সেহরি ও ইফতার (লোকেশন বেজড লজিক পরে অ্যাড করবো) -->
-    <div class="timing-container">
+    <section class="timing-section">
+        <!-- সেহরি কার্ড -->
         <div class="timing-card">
-            <h3><i class="fas fa-moon"></i> সেহরির শেষ সময়</h3>
-            <span class="time" id="sehri-time">-- : --</span>
-            <button class="btn-loc" onclick="changeCity('Chittagong')">লোকেশন: চট্টগ্রাম</button>
+            <span class="icon-top"><i class="fas fa-moon"></i></span>
+            <span class="time-label">সেহরির শেষ সময়</span>
+            <span class="time-val" id="sehriVal">--:--</span>
+            <span class="city-label" id="sehriLoc">লোকেশন: চট্টগ্রাম</span>
         </div>
+        <!-- ইফতার কার্ড -->
         <div class="timing-card">
-            <h3><i class="fas fa-sun"></i> ইফতারের সময়</h3>
-            <span class="time" id="iftar-time">-- : --</span>
-            <button class="btn-loc" onclick="changeCity('Dhaka')">আজকের জুম্মাবার</button>
+            <span class="icon-top" style="color: var(--accent);"><i class="fas fa-sun"></i></span>
+            <span class="time-label">ইফতার শুরু / মাগরিব</span>
+            <span class="time-val" id="iftarVal">--:--</span>
+            <span class="city-label" id="iftarLoc">লোকেশন: চট্টগ্রাম</span>
         </div>
-    </div>
+    </section>
 
-    <!-- ফিচার গ্রিড -->
-    <div class="feature-grid">
-        <a href="calculator.html" class="f-box"><i class="fas fa-calculator"></i>যাকাত ক্যালকুলেটর</a>
-        <a href="tracker.html" class="f-box"><i class="fas fa-list-check"></i>রোজার ট্র্যাকার</a>
-        <a href="blog.html" class="f-box"><i class="fas fa-pen-nib"></i>ইসলামিক ব্লগ</a>
-        <a href="shop.html" class="f-box"><i class="fas fa-store"></i>ডিজিটাল শপ</a>
-    </div>
+    <section class="tools-grid">
+        <a href="calculator.html" class="tool-btn"><i class="fas fa-coins"></i>যাকাত হিসাব</a>
+        <a href="tracker.html" class="tool-btn"><i class="fas fa-list-check"></i>রোজার ট্র্যাকার</a>
+        <a href="blog.html" class="tool-btn"><i class="fas fa-pen-nib"></i>ইসলামিক ব্লগ</a>
+        <a href="shop.html" class="tool-btn"><i class="fas fa-store"></i>রমজান স্টোর</a>
+    </section>
+    <center>
 
-    <div class="verse-box">
-        <p style="font-size: 0.9rem; color: var(--accent);">কুরআনের নূর</p>
-        <p id="quran-verse">"হে মুমিনগণ, তোমাদের জন্য সিয়ামকে ফরজ করা হয়েছে..."</p>
-        <small>- আল কুরআন (সুরা বাকারা, ১৮৩)</small>
+     <div class="verse-box">
+        <p style="font-size: 0.9rem; color: var(--accent);">কুরআনের আলো</p>
+        <p id="quran-verse">"হে ঈমানদারগণ! তোমাদের উপর রোজা ফরজ করা হয়েছে, যেমন তোমাদের পূর্ববর্তীদের উপর ফরজ করা হয়েছিল, যাতে তোমরা তাকওয়া অর্জন করতে পারো।"</p>
+        <small>- সুরা বাকারা ; ১৮৩</small>
     </div>
+    </center>
 
     <footer>
-        Digital Creator: Al-Kafi | Justice & Faith 🚩<br>
-        managed with Sabr for Noha (Amanat).
+        "হে আল্লাহ! তুমি আমাদের ধৈর্য ও সফলতার আমানত দান করো।"<br>
+        Developed with Sabr by <a href="#" style="color: #f59e0b; text-decoration: none;">Kafi Ahad</a>
     </footer>
 
     <script>
-        // API দিয়ে সময় নিয়ে আসার লজিক
+        // এপিআই থেকে ডেটা আনার জাদুকরী লজিক
         async function fetchTimings(city) {
             try {
                 const response = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Bangladesh&method=1`);
-                const data = await response.json();
-                document.getElementById('sehri-time').innerText = data.data.timings.Imsak;
-                document.getElementById('iftar-time').innerText = data.data.timings.Maghrib;
-            } catch (e) { console.log("Error loading timings."); }
+                const resData = await response.json();
+                const T = resData.data.timings;
+                
+                // সময় আপডেট করা
+                document.getElementById('sehriVal').innerText = formatTo12H(T.Imsak);
+                document.getElementById('iftarVal').innerText = formatTo12H(T.Maghrib);
+                
+                // সিটি লেবেল আপডেট করা
+                const displayCity = city === "Khagrachari" ? "খাগড়াছড়ি" : (city === "Chittagong" ? "চট্টগ্রাম" : city);
+                document.getElementById('sehriLoc').innerText = "লোকেশন: " + displayCity;
+                document.getElementById('iftarLoc').innerText = "লোকেশন: " + displayCity;
+            } catch (err) { console.error("Update failed."); }
         }
 
-        // ১৯ জানুয়ারি ১ মাস উদযাপনের সম্মানে আপনার কাউন্টডাউন শুরু ১৮ই ফেব্রুয়ারির জন্য
-        const targetDate = new Date("February 18, 2026 05:00:00").getTime();
+        // ২৪ ঘণ্টা থেকে ১২ ঘণ্টায় কনভার্ট
+        function formatTo12H(time) {
+            let [h, m] = time.split(':');
+            let hour = parseInt(h);
+            return (hour % 12 || 12).toString().padStart(2, '0') + ":" + m;
+        }
+
+        // অটোমেটিক রিয়েল টাইম ডেট
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        document.getElementById('currentDate').innerText = new Date().toLocaleDateString('bn-BD', options);
+
+        // রমজান শুরু হওয়ার টাইমার (১৮ ফেব্রুয়ারি ২০২৬)
+        const target = new Date("Feb 18, 2026 05:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
-            const dist = targetDate - now;
-            const days = Math.floor(dist / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('global-timer').innerHTML = `${days} দিন : ${hours} ঘণ্টা বাকি`;
+            const d = target - now;
+            if (d < 0) {
+                document.getElementById('globalCountdown').innerHTML = "রমজান মোবারক!";
+                return;
+            }
+            const days = Math.floor(d / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('globalCountdown').innerHTML = `${days} দিন : ${hours} ঘণ্টা বাকি`;
         }, 1000);
 
+        // ডিফল্ট ভাবে চট্টগ্রাম লোড হবে
         fetchTimings('Chittagong');
     </script>
 </body>
